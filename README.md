@@ -1,6 +1,11 @@
+ 
 # SLG MOTORS
 
 A React replica of the SLG MOTORS industrial motors landing page.
+
+## Developers 
+Jai
+Claude
 
 ## Prerequisites
 
