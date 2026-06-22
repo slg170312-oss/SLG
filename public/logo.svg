@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 78" role="img" aria-label="SLG Motors logo">
+  <defs>
+    <linearGradient id="slg-metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="48%" stop-color="#9aa1ab" />
+      <stop offset="56%" stop-color="#727983" />
+      <stop offset="100%" stop-color="#eef1f4" />
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="196" height="74" rx="11" fill="#2589d6" stroke="#0a0a0c" stroke-width="3" />
+  <text x="99" y="47" text-anchor="middle" font-family="'Arial Black', Arial, sans-serif" font-weight="900" font-size="44" letter-spacing="4" fill="url(#slg-metal)" stroke="#5b636e" stroke-width="0.75">SLG</text>
+  <rect x="132" y="31" width="9" height="9" rx="1" fill="#37c84a" />
+  <text x="100" y="69" text-anchor="middle" font-family="Arial, sans-serif" font-weight="600" font-size="11" letter-spacing="8" fill="#d4d8de">MOTORS</text>
+</svg>
