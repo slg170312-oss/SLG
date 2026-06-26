@@ -1,27 +1,25 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { categories } from '../data/productCategories';
-import { countries } from '../data/countries';
-import CountrySelect from './CountrySelect';
 
 const EMAIL_PATTERN = '[^\\s@]+@[^\\s@]+\\.[^\\s@]+';
 const NAME_MAX = 35;
+const PHONE_DIGITS = 10;
 const LOCATION_MAX = 250;
 
+// Replace with your deployed Google Apps Script URL
+const APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbylFcEypYV-YH1kHr3FvcN8n1tzPncNRj5VeVDqd6QDV2EM-peVlNMFO34ZGVKwEO4D/exec';
+
 export default function EnquiryModal({ onClose }) {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | submitting | success | error
   const [form, setForm] = useState({
     name: '',
-    country: 'IN',
     phone: '',
     location: '',
     email: '',
     product: '',
   });
-
-  const selectedCountry = useMemo(
-    () => countries.find((c) => c.iso2 === form.country) ?? countries[0],
-    [form.country]
-  );
+  const openedAt = useRef(Date.now());
 
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -38,14 +36,8 @@ export default function EnquiryModal({ onClose }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'country') {
-      const next = countries.find((c) => c.iso2 === value) ?? countries[0];
-      setForm((prev) => ({ ...prev, country: value, phone: prev.phone.slice(0, next.digits) }));
-      return;
-    }
-
     if (name === 'phone') {
-      const digits = value.replace(/\D/g, '').slice(0, selectedCountry.digits);
+      const digits = value.replace(/\D/g, '').slice(0, PHONE_DIGITS);
       setForm((prev) => ({ ...prev, phone: digits }));
       return;
     }
@@ -53,11 +45,35 @@ export default function EnquiryModal({ onClose }) {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Front-end only for now — wire this up to an API/email service to persist it.
-    setSubmitted(true);
+
+    // Time-based spam check — reject if submitted < 2s after opening
+    if (Date.now() - openedAt.current < 2000) return;
+
+    setStatus('submitting');
+
+    try {
+      const payload = {
+        ...form,
+        isActive: 1,
+        isVerified: 0,
+        _hp: document.getElementById('enq-hp')?.value || '',
+      };
+
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    }
   };
+
+  const isSubmitting = status === 'submitting';
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -77,7 +93,7 @@ export default function EnquiryModal({ onClose }) {
           ×
         </button>
 
-        {submitted ? (
+        {status === 'success' ? (
           <div className="enquiry-success">
             <span className="enquiry-success__icon" aria-hidden="true">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
@@ -108,6 +124,17 @@ export default function EnquiryModal({ onClose }) {
               Tell us what you need and our team will get back to you.
             </p>
             <form className="enquiry-form" onSubmit={handleSubmit}>
+              {/* Honeypot — hidden from humans, bots auto-fill it */}
+              <input
+                id="enq-hp"
+                name="_hp"
+                type="text"
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0 }}
+              />
+
               <div className="field">
                 <div className="field__head">
                   <label className="field__label" htmlFor="enq-name">
@@ -126,6 +153,7 @@ export default function EnquiryModal({ onClose }) {
                   onChange={handleChange}
                   placeholder="Your full name"
                   maxLength={NAME_MAX}
+                  disabled={isSubmitting}
                   required
                 />
               </div>
@@ -134,28 +162,21 @@ export default function EnquiryModal({ onClose }) {
                 <label className="field__label" htmlFor="enq-phone">
                   Contact No.
                 </label>
-                <div className="phone-row">
-                  <CountrySelect
-                    value={form.country}
-                    onChange={(iso2) =>
-                      handleChange({ target: { name: 'country', value: iso2 } })
-                    }
-                  />
-                  <input
-                    className="field__input"
-                    id="enq-phone"
-                    name="phone"
-                    type="tel"
-                    inputMode="numeric"
-                    value={form.phone}
-                    onChange={handleChange}
-                    placeholder={`${selectedCountry.digits}-digit number`}
-                    maxLength={selectedCountry.digits}
-                    pattern={`\\d{${selectedCountry.digits}}`}
-                    title={`Enter a valid ${selectedCountry.digits}-digit number for ${selectedCountry.name}.`}
-                    required
-                  />
-                </div>
+                <input
+                  className="field__input"
+                  id="enq-phone"
+                  name="phone"
+                  type="tel"
+                  inputMode="numeric"
+                  value={form.phone}
+                  onChange={handleChange}
+                  placeholder={`${PHONE_DIGITS}-digit number`}
+                  maxLength={PHONE_DIGITS}
+                  pattern={`\\d{${PHONE_DIGITS}}`}
+                  title={`Enter a valid ${PHONE_DIGITS}-digit phone number.`}
+                  disabled={isSubmitting}
+                  required
+                />
               </div>
 
               <div className="field">
@@ -176,6 +197,7 @@ export default function EnquiryModal({ onClose }) {
                   placeholder="City, state or full address"
                   maxLength={LOCATION_MAX}
                   rows={2}
+                  disabled={isSubmitting}
                   required
                 />
               </div>
@@ -194,6 +216,7 @@ export default function EnquiryModal({ onClose }) {
                   placeholder="you@company.com"
                   pattern={EMAIL_PATTERN}
                   title="Enter a valid email address, e.g. name@company.com"
+                  disabled={isSubmitting}
                 />
               </div>
 
@@ -207,6 +230,7 @@ export default function EnquiryModal({ onClose }) {
                   name="product"
                   value={form.product}
                   onChange={handleChange}
+                  disabled={isSubmitting}
                   required
                 >
                   <option value="" disabled>
@@ -221,8 +245,25 @@ export default function EnquiryModal({ onClose }) {
                 </select>
               </div>
 
-              <button className="btn btn--primary btn--lg" type="submit">
-                SUBMIT ENQUIRY
+              {status === 'error' && (
+                <p className="enquiry-error">
+                  Something went wrong. Please try again.
+                </p>
+              )}
+
+              <button
+                className="btn btn--primary btn--lg"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <span className="spinner" aria-hidden="true" />
+                    SUBMITTING…
+                  </>
+                ) : (
+                  'SUBMIT ENQUIRY'
+                )}
               </button>
             </form>
           </>
