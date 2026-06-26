@@ -1,14 +1,12 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CertBadges from './CertBadges';
-import EnquiryModal from './EnquiryModal';
+import { useEnquiry } from '../context/EnquiryContext';
 
 export default function Hero() {
-  const [enquiryOpen, setEnquiryOpen] = useState(false);
+  const { openEnquiry } = useEnquiry();
 
   return (
-    <>
-      <section className="hero">
+    <section className="hero">
         <div className="hero__overlay" aria-hidden="true" />
         <div className="hero__grid" aria-hidden="true" />
         <div className="hero__content container">
@@ -43,15 +41,13 @@ export default function Hero() {
             <button
               type="button"
               className="btn btn--ghost"
-              onClick={() => setEnquiryOpen(true)}
+              onClick={() => openEnquiry()}
             >
               ENQUIRE NOW
             </button>
           </div>
         </div>
         <CertBadges />
-      </section>
-      {enquiryOpen && <EnquiryModal onClose={() => setEnquiryOpen(false)} />}
-    </>
+    </section>
   );
 }

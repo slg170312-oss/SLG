@@ -1,0 +1,44 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.45" />
+      <stop offset="60%" stop-color="#2563eb" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#3b82f6" stroke-opacity="0.08" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0a1120" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+
+  <!-- eyebrow -->
+  <text x="90" y="232" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700"
+        letter-spacing="6" fill="#3b82f6">EST. 1989 &#183; MADE IN INDIA &#183; BHARAT STANDARDS</text>
+
+  <!-- wordmark -->
+  <text x="86" y="350" font-family="Arial, Helvetica, sans-serif" font-size="120" font-weight="800"
+        letter-spacing="2" fill="#ffffff">SLG MOTORS</text>
+
+  <!-- tagline -->
+  <text x="90" y="424" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="600" fill="#d1d5db">
+    Precision Motors <tspan fill="#3b82f6">for India.</tspan>
+  </text>
+
+  <!-- certification chips -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
+    <rect x="90" y="500" width="220" height="58" rx="6" fill="#111827" stroke="#3b82f6" stroke-opacity="0.35" />
+    <text x="200" y="538" text-anchor="middle" fill="#ffffff">ISO 9001:2015</text>
+
+    <rect x="330" y="500" width="170" height="58" rx="6" fill="#111827" stroke="#22c55e" stroke-opacity="0.35" />
+    <text x="415" y="538" text-anchor="middle" fill="#ffffff">BIS CERTIFIED</text>
+
+    <rect x="520" y="500" width="200" height="58" rx="6" fill="#111827" stroke="#eab308" stroke-opacity="0.4" />
+    <text x="620" y="538" text-anchor="middle" fill="#ffffff">IE3 EFFICIENCY</text>
+  </g>
+
+  <!-- accent bar -->
+  <rect x="0" y="622" width="1200" height="8" fill="#2563eb" />
+</svg>

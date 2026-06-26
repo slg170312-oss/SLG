@@ -1,14 +1,24 @@
 import { useState, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { categories } from '../data/productCategories';
 import CategoryHero from '../components/products/CategoryHero';
 import CategoryCover from '../components/products/CategoryCover';
 import VariantDetail from '../components/products/VariantDetail';
-import ExploreCategories from '../components/products/ExploreCategories';
 import ProductsCTA from '../components/products/ProductsCTA';
+import usePageMeta from '../hooks/usePageMeta';
 
 export default function ProductsPage() {
-  const [activeCategoryId, setActiveCategoryId] = useState(categories[0].id);
-  const [selectedVariant, setSelectedVariant] = useState(categories[0].variants[0]);
+  usePageMeta(
+    'Products',
+    'Browse the SLG Motors industrial range — AC induction, servo, BLDC, flameproof and brake motors, borewell pumps, air compressors and car & bike wash systems.',
+  );
+
+  const [searchParams] = useSearchParams();
+  const paramCategory = categories.find((c) => c.id === searchParams.get('category'));
+  const initialCategory = paramCategory ?? categories[0];
+
+  const [activeCategoryId, setActiveCategoryId] = useState(initialCategory.id);
+  const [selectedVariant, setSelectedVariant] = useState(initialCategory.variants[0]);
 
   const activeCategory = categories.find((c) => c.id === activeCategoryId) ?? categories[0];
 
@@ -48,13 +58,10 @@ export default function ProductsPage() {
           key={selectedVariant?.id ?? 'none'}
           variant={selectedVariant}
           category={activeCategory}
+          variants={activeCategory.variants}
+          onSelectVariant={setSelectedVariant}
         />
       </div>
-      <ExploreCategories
-        categories={categories}
-        activeCategoryId={activeCategoryId}
-        onCategoryChange={handleCategoryChange}
-      />
       <ProductsCTA />
     </div>
   );

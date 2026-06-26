@@ -1,4 +1,8 @@
+import { useEnquiry } from '../../context/EnquiryContext';
+
 export default function ProductsCTA() {
+  const { openEnquiry } = useEnquiry();
+
   return (
     <section className="products-cta">
       <div className="products-cta__overlay" aria-hidden="true" />
@@ -7,9 +11,13 @@ export default function ProductsCTA() {
         <h2 className="products-cta__title">
           Volume pricing for OEMs, EPCs &amp; distributors.
         </h2>
-        <a href="#" className="btn btn--primary btn--lg">
+        <button
+          type="button"
+          className="btn btn--primary btn--lg"
+          onClick={() => openEnquiry()}
+        >
           CONTACT SALES TEAM
-        </a>
+        </button>
       </div>
     </section>
   );

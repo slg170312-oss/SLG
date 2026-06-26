@@ -1,3 +1,5 @@
+import CategoryIcon from '../../data/categoryIcons';
+
 export default function CategoryCover({ category, selectedVariant, onSelectVariant }) {
   return (
     <section
@@ -18,7 +20,8 @@ export default function CategoryCover({ category, selectedVariant, onSelectVaria
           <h2 className="category-cover__title">{category.title}</h2>
           <p className="category-cover__desc">{category.description}</p>
           <span className="category-cover__badge">
-            {category.icon} {category.shortName}
+            <CategoryIcon id={category.id} className="category-cover__badge-icon" />
+            {category.shortName}
           </span>
         </div>
 
@@ -42,7 +45,7 @@ export default function CategoryCover({ category, selectedVariant, onSelectVaria
               <div className="variant-card__body">
                 <h3 className="variant-card__name">{variant.name}</h3>
                 <div className="variant-card__tags">
-                  {variant.tags.map((tag) => (
+                  {variant.tags.slice(0, 2).map((tag) => (
                     <span key={tag} className="variant-card__tag">
                       {tag}
                     </span>

@@ -1,23 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { categories } from '../data/productCategories';
+import { submitEnquiry } from '../utils/enquiry';
 
 const EMAIL_PATTERN = '[^\\s@]+@[^\\s@]+\\.[^\\s@]+';
 const NAME_MAX = 35;
 const PHONE_DIGITS = 10;
 const LOCATION_MAX = 250;
 
-// Replace with your deployed Google Apps Script URL
-const APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbylFcEypYV-YH1kHr3FvcN8n1tzPncNRj5VeVDqd6QDV2EM-peVlNMFO34ZGVKwEO4D/exec';
-
-export default function EnquiryModal({ onClose }) {
+export default function EnquiryModal({ onClose, prefillProduct = '' }) {
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
   const [form, setForm] = useState({
     name: '',
     phone: '',
     location: '',
     email: '',
-    product: '',
+    product: prefillProduct,
   });
   const openedAt = useRef(Date.now());
 
@@ -54,19 +51,10 @@ export default function EnquiryModal({ onClose }) {
     setStatus('submitting');
 
     try {
-      const payload = {
+      await submitEnquiry({
         ...form,
-        isActive: 1,
-        isVerified: 0,
         _hp: document.getElementById('enq-hp')?.value || '',
-      };
-
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify(payload),
       });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus('success');
     } catch {
       setStatus('error');

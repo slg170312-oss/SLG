@@ -1,5 +1,34 @@
-export default function VariantDetail({ variant, category }) {
+import { useState, useCallback } from 'react';
+import { useEnquiry } from '../../context/EnquiryContext';
+
+export default function VariantDetail({ variant, category, variants = [], onSelectVariant }) {
+  const { openEnquiry } = useEnquiry();
+  const [slideDir, setSlideDir] = useState(null);
+
+  const currentIndex = variants.findIndex((v) => v.id === variant?.id);
+
+  const navigate = useCallback(
+    (dir) => {
+      const nextIndex = currentIndex + dir;
+      if (nextIndex < 0 || nextIndex >= variants.length) return;
+      setSlideDir(dir > 0 ? 'left' : 'right');
+      setTimeout(() => {
+        onSelectVariant?.(variants[nextIndex]);
+        setSlideDir(null);
+      }, 250);
+    },
+    [currentIndex, variants, onSelectVariant],
+  );
+
   if (!variant) return null;
+
+  const handleDownloadDatasheet = async () => {
+    const { downloadDatasheet } = await import('../../utils/datasheet');
+    downloadDatasheet(variant, category);
+  };
+
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex < variants.length - 1;
 
   return (
     <section
@@ -9,7 +38,51 @@ export default function VariantDetail({ variant, category }) {
       <div className="variant-detail__inner container">
         <div className="variant-detail__left">
           <div className="variant-detail__image-wrap">
-            <img src={variant.image} alt={variant.name} className="variant-detail__image" />
+            <img
+              src={variant.image}
+              alt={variant.name}
+              className={`variant-detail__image ${slideDir ? `slide-out-${slideDir}` : 'slide-in'}`}
+            />
+            {variants.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  className={`variant-nav variant-nav--prev ${!hasPrev ? 'variant-nav--disabled' : ''}`}
+                  onClick={() => navigate(-1)}
+                  disabled={!hasPrev}
+                  aria-label="Previous variant"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+                <button
+                  type="button"
+                  className={`variant-nav variant-nav--next ${!hasNext ? 'variant-nav--disabled' : ''}`}
+                  onClick={() => navigate(1)}
+                  disabled={!hasNext}
+                  aria-label="Next variant"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+                <div className="variant-dots">
+                  {variants.map((v, i) => (
+                    <button
+                      key={v.id}
+                      type="button"
+                      className={`variant-dot ${i === currentIndex ? 'variant-dot--active' : ''}`}
+                      onClick={() => {
+                        if (i === currentIndex) return;
+                        setSlideDir(i > currentIndex ? 'left' : 'right');
+                        setTimeout(() => {
+                          onSelectVariant?.(v);
+                          setSlideDir(null);
+                        }, 250);
+                      }}
+                      aria-label={`View ${v.name}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
           <div className="variant-detail__info">
             {variant.badge && (
@@ -25,12 +98,20 @@ export default function VariantDetail({ variant, category }) {
               ))}
             </div>
             <div className="variant-detail__actions">
-              <a href="#" className="btn btn--primary">
+              <button
+                type="button"
+                className="btn btn--primary"
+                onClick={() => openEnquiry(category.name)}
+              >
                 GET QUOTE
-              </a>
-              <a href="#" className="btn btn--ghost-dark">
+              </button>
+              <button
+                type="button"
+                className="btn btn--ghost-dark"
+                onClick={handleDownloadDatasheet}
+              >
                 DOWNLOAD DATASHEET
-              </a>
+              </button>
             </div>
           </div>
         </div>

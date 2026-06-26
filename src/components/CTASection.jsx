@@ -1,4 +1,8 @@
+import { useEnquiry } from '../context/EnquiryContext';
+
 export default function CTASection() {
+  const { openEnquiry } = useEnquiry();
+
   return (
     <section className="cta-section">
       <div className="cta-section__overlay" aria-hidden="true" />
@@ -7,9 +11,13 @@ export default function CTASection() {
         <h2 className="cta-section__title">
           Volume pricing available for OEMs &amp; distributors.
         </h2>
-        <a href="#" className="btn btn--ghost btn--lg">
+        <button
+          type="button"
+          className="btn btn--ghost btn--lg"
+          onClick={() => openEnquiry()}
+        >
           REQUEST A QUOTE
-        </a>
+        </button>
       </div>
     </section>
   );

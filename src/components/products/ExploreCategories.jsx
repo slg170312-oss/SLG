@@ -1,3 +1,5 @@
+import CategoryIcon from '../../data/categoryIcons';
+
 export default function ExploreCategories({ categories, activeCategoryId, onCategoryChange }) {
   return (
     <section className="explore-categories">
@@ -27,7 +29,9 @@ export default function ExploreCategories({ categories, activeCategoryId, onCate
               />
               <div className="explore-card__overlay" aria-hidden="true" />
               <div className="explore-card__content">
-                <span className="explore-card__icon">{category.icon}</span>
+                <span className="explore-card__icon" aria-hidden="true">
+                  <CategoryIcon id={category.id} />
+                </span>
                 <h3 className="explore-card__name">{category.name}</h3>
                 <p className="explore-card__count">
                   {category.variants.length} Models Available

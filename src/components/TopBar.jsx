@@ -1,5 +1,4 @@
-const COMPANY_EMAIL = 'sales@slgmotors.in';
-const COMPANY_PHONE = '+91 98765 43210';
+import { siteConfig, telHref, mailHref } from '../data/siteConfig';
 
 export default function TopBar() {
   return (
@@ -8,15 +7,12 @@ export default function TopBar() {
         <div className="topbar__contact">
           <span className="topbar__label">CONTACT</span>
           <span className="topbar__divider" aria-hidden="true">·</span>
-          <a className="topbar__contact-item" href={`mailto:${COMPANY_EMAIL}`}>
-            {COMPANY_EMAIL}
+          <a className="topbar__contact-item" href={mailHref}>
+            {siteConfig.email}
           </a>
           <span className="topbar__divider" aria-hidden="true">·</span>
-          <a
-            className="topbar__contact-item"
-            href={`tel:${COMPANY_PHONE.replace(/\s+/g, '')}`}
-          >
-            {COMPANY_PHONE}
+          <a className="topbar__contact-item" href={telHref}>
+            {siteConfig.phone}
           </a>
         </div>
       </div>
