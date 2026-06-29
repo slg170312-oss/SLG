@@ -1,23 +1,65 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useEnquiry } from '../../context/EnquiryContext';
 
 export default function VariantDetail({ variant, category, variants = [], onSelectVariant }) {
   const { openEnquiry } = useEnquiry();
   const [slideDir, setSlideDir] = useState(null);
+  const [activeImage, setActiveImage] = useState(variant?.image);
 
   const currentIndex = variants.findIndex((v) => v.id === variant?.id);
+  const galleryImages = variant ? [variant.image, ...(variant.gallery || [])] : [];
 
-  const navigate = useCallback(
-    (dir) => {
-      const nextIndex = currentIndex + dir;
-      if (nextIndex < 0 || nextIndex >= variants.length) return;
+  // When the product is changed from outside (a card in the grid above), show its
+  // first photo. Arrow/dot navigation sets the photo itself, so the includes()
+  // check leaves that choice untouched and avoids a late-effect clobber.
+  useEffect(() => {
+    if (!variant) return;
+    const images = [variant.image, ...(variant.gallery || [])];
+    setActiveImage((curr) => (images.includes(curr) ? curr : images[0]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [variant?.id]);
+
+  const goToVariant = useCallback(
+    (nextVariant, dir, startAtLast) => {
+      const images = [nextVariant.image, ...(nextVariant.gallery || [])];
       setSlideDir(dir > 0 ? 'left' : 'right');
       setTimeout(() => {
-        onSelectVariant?.(variants[nextIndex]);
+        onSelectVariant?.(nextVariant);
+        setActiveImage(startAtLast ? images[images.length - 1] : images[0]);
         setSlideDir(null);
       }, 250);
     },
-    [currentIndex, variants, onSelectVariant],
+    [onSelectVariant],
+  );
+
+  const stepImage = useCallback((image, dir) => {
+    setSlideDir(dir > 0 ? 'left' : 'right');
+    setTimeout(() => {
+      setActiveImage(image);
+      setSlideDir(null);
+    }, 250);
+  }, []);
+
+  // The arrows step through every photo of the current product first, then move
+  // on to the next/previous product — wrapping around at the very ends.
+  const navigate = useCallback(
+    (dir) => {
+      const imgIdx = Math.max(0, galleryImages.indexOf(activeImage));
+      if (dir > 0) {
+        if (imgIdx < galleryImages.length - 1) {
+          stepImage(galleryImages[imgIdx + 1], 1);
+        } else if (variants.length > 1) {
+          const nextIndex = (currentIndex + 1) % variants.length;
+          goToVariant(variants[nextIndex], 1, false);
+        }
+      } else if (imgIdx > 0) {
+        stepImage(galleryImages[imgIdx - 1], -1);
+      } else if (variants.length > 1) {
+        const prevIndex = (currentIndex - 1 + variants.length) % variants.length;
+        goToVariant(variants[prevIndex], -1, true);
+      }
+    },
+    [activeImage, galleryImages, currentIndex, variants, goToVariant, stepImage],
   );
 
   if (!variant) return null;
@@ -26,9 +68,6 @@ export default function VariantDetail({ variant, category, variants = [], onSele
     const { downloadDatasheet } = await import('../../utils/datasheet');
     downloadDatasheet(variant, category);
   };
-
-  const hasPrev = currentIndex > 0;
-  const hasNext = currentIndex < variants.length - 1;
 
   return (
     <section
@@ -39,7 +78,7 @@ export default function VariantDetail({ variant, category, variants = [], onSele
         <div className="variant-detail__left">
           <div className="variant-detail__image-wrap">
             <img
-              src={variant.image}
+              src={activeImage}
               alt={variant.name}
               className={`variant-detail__image ${slideDir ? `slide-out-${slideDir}` : 'slide-in'}`}
             />
@@ -47,19 +86,17 @@ export default function VariantDetail({ variant, category, variants = [], onSele
               <>
                 <button
                   type="button"
-                  className={`variant-nav variant-nav--prev ${!hasPrev ? 'variant-nav--disabled' : ''}`}
+                  className="variant-nav variant-nav--prev"
                   onClick={() => navigate(-1)}
-                  disabled={!hasPrev}
-                  aria-label="Previous variant"
+                  aria-label="Previous photo or product"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
                 <button
                   type="button"
-                  className={`variant-nav variant-nav--next ${!hasNext ? 'variant-nav--disabled' : ''}`}
+                  className="variant-nav variant-nav--next"
                   onClick={() => navigate(1)}
-                  disabled={!hasNext}
-                  aria-label="Next variant"
+                  aria-label="Next photo or product"
                 >
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </button>
@@ -71,11 +108,7 @@ export default function VariantDetail({ variant, category, variants = [], onSele
                       className={`variant-dot ${i === currentIndex ? 'variant-dot--active' : ''}`}
                       onClick={() => {
                         if (i === currentIndex) return;
-                        setSlideDir(i > currentIndex ? 'left' : 'right');
-                        setTimeout(() => {
-                          onSelectVariant?.(v);
-                          setSlideDir(null);
-                        }, 250);
+                        goToVariant(v, i > currentIndex ? 1 : -1, false);
                       }}
                       aria-label={`View ${v.name}`}
                     />
@@ -84,6 +117,21 @@ export default function VariantDetail({ variant, category, variants = [], onSele
               </>
             )}
           </div>
+          {galleryImages.length > 1 && (
+            <div className="variant-thumbs">
+              {galleryImages.map((img, i) => (
+                <button
+                  key={`${img}-${i}`}
+                  type="button"
+                  className={`variant-thumb ${img === activeImage ? 'variant-thumb--active' : ''}`}
+                  onClick={() => setActiveImage(img)}
+                  aria-label={`View photo ${i + 1} of ${variant.name}`}
+                >
+                  <img src={img} alt="" loading="lazy" />
+                </button>
+              ))}
+            </div>
+          )}
           <div className="variant-detail__info">
             {variant.badge && (
               <span className="variant-detail__badge">{variant.badge}</span>
@@ -118,7 +166,7 @@ export default function VariantDetail({ variant, category, variants = [], onSele
 
         <div className="variant-detail__right">
           <span className="section-label section-label--dark">Technical Specifications</span>
-          <div className="spec-table">
+          <div className="spec-table" key={variant.id}>
             {variant.specs.map((spec, i) => (
               <div
                 key={spec.label}

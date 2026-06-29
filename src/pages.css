@@ -594,3 +594,88 @@ a.contact-card__value:hover {
   flex-wrap: wrap;
   margin-top: 1.75rem;
 }
+
+/* ── Custom Manufacturing page ── */
+.custom-page .capability-grid,
+.custom-page .cert-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.custom-intro {
+  max-width: 56ch;
+  margin: -1.5rem 0 2.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-gray-400);
+}
+
+.process-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  counter-reset: step;
+}
+
+.process-card {
+  position: relative;
+  padding: 1.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.process-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.process-card__num {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--color-blue-bright);
+  margin-bottom: 0.75rem;
+}
+
+.process-card__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.process-card__text {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-gray-400);
+  margin: 0;
+}
+
+.page-cta__note {
+  max-width: 64ch;
+  margin: 0.75rem auto 1.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 900px) {
+  .custom-page .capability-grid,
+  .custom-page .cert-grid,
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .custom-page .capability-grid,
+  .custom-page .cert-grid,
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+}

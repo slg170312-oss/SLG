@@ -24,7 +24,7 @@ export default function CategoryHero({ categories, activeCategoryId, onCategoryC
         </h1>
         <p className="products-hero__description">
           Four industrial product lines — all engineered, assembled, and
-          quality-certified at our facility in Maharashtra.
+          quality-certified at our facility in Coimbatore.
         </p>
       </div>
       <nav className="category-tabs" aria-label="Product categories">

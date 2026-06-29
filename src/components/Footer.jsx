@@ -22,6 +22,7 @@ export default function Footer() {
           <h4 className="footer__heading">Company</h4>
           <Link to="/">Home</Link>
           <Link to="/products">Products</Link>
+          <Link to="/custom">Custom Manufacturing</Link>
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact</Link>
         </nav>
@@ -39,6 +40,9 @@ export default function Footer() {
           <h4 className="footer__heading">Get in touch</h4>
           <a href={mailHref}>{siteConfig.email}</a>
           <a href={telHref}>{siteConfig.phone}</a>
+          {siteConfig.phoneAlt && (
+            <a href={`tel:${siteConfig.phoneAlt.replace(/[^\d+]/g, '')}`}>{siteConfig.phoneAlt}</a>
+          )}
           <span className="footer__addr">
             {siteConfig.address.line1}, {siteConfig.address.line2}
           </span>

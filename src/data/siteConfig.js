@@ -1,18 +1,19 @@
 // Single source of truth for company contact details and identity.
-// NOTE: values below are placeholders — update them with the real
-// business email, phone, address and CIN before launch.
+// NOTE: email and CIN are still placeholders — update before launch.
 export const siteConfig = {
   name: 'SLG Motors',
-  legalName: 'SLG Motors Pvt. Ltd.',
-  established: 1989,
-  cin: 'U31100MH1989PTC054321',
+  fullName: 'Sree Lakshmi Ganapathy Engg. Industries',
+  legalName: 'Sree Lakshmi Ganapathy Engg. Industries',
+  established: 2003,
+  cin: 'U31100TN2003PTC054321', // TODO: placeholder only — replace with real CIN before launch
   tagline: 'Precision Motors for India.',
-  email: 'sales@slgmotors.in',
-  phone: '+91 98765 43210',
-  whatsapp: '+91 98765 43210',
+  email: 'sales@slgmotors.in', // TODO: replace with real email
+  phone: '+91 98435 50403',
+  phoneAlt: '+91 93632 44891',
+  whatsapp: '+91 98435 50403',
   address: {
-    line1: 'Plot No. 14, MIDC Industrial Area',
-    line2: 'Pune, Maharashtra 411019',
+    line1: '7/74, SKV Employees Colony, Kamatchi Puram',
+    line2: 'Coimbatore 641016',
     country: 'India',
   },
   hours: [

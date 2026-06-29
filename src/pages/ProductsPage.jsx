@@ -55,7 +55,7 @@ export default function ProductsPage() {
       />
       <div ref={detailRef}>
         <VariantDetail
-          key={selectedVariant?.id ?? 'none'}
+          key={activeCategory.id}
           variant={selectedVariant}
           category={activeCategory}
           variants={activeCategory.variants}

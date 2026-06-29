@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import ProductsPage from './pages/ProductsPage';
 import About from './pages/About';
+import Custom from './pages/Custom';
 import Contact from './pages/Contact';
 import LegalPage from './pages/LegalPage';
 import NotFound from './pages/NotFound';
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/custom" element={<Custom />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<LegalPage page="privacy" />} />
           <Route path="/terms" element={<LegalPage page="terms" />} />

@@ -3,10 +3,10 @@ import usePageMeta from '../hooks/usePageMeta';
 import { useEnquiry } from '../context/EnquiryContext';
 
 const milestones = [
-  { year: '1989', text: 'Founded in Maharashtra as a motor rewinding and repair workshop.' },
-  { year: '1998', text: 'Commissioned the first in-house winding and assembly lines.' },
-  { year: '2009', text: 'Certified to ISO 9001 with BIS approvals across the core range.' },
-  { year: '2018', text: 'Expanded into IE3/IE4 high-efficiency and BLDC motor platforms.' },
+  { year: '2003', text: 'Founded in Coimbatore as a motor rewinding and repair workshop.' },
+  { year: '2009', text: 'Commissioned the first in-house winding and assembly lines.' },
+  { year: '2015', text: 'Certified to ISO 9001 with BIS approvals across the core range.' },
+  { year: '2020', text: 'Expanded into IE3/IE4 high-efficiency and BLDC motor platforms.' },
   { year: 'Today', text: 'Supplying OEMs, EPCs and distributors across 38 states.' },
 ];
 
@@ -65,7 +65,7 @@ export default function About() {
   const { openEnquiry } = useEnquiry();
   usePageMeta(
     'About Us',
-    'SLG Motors has manufactured high-efficiency industrial electric motors in Maharashtra, India since 1989 — ISO 9001 certified and BIS compliant.',
+    'SLG Motors (Sree Lakshmi Ganapathy Engg. Industries) has manufactured high-efficiency industrial electric motors in Coimbatore, India since 2003 — ISO 9001 certified and BIS compliant.',
   );
 
   return (
@@ -87,10 +87,10 @@ export default function About() {
           <h1 className="page-hero__title">
             Engineering motion
             <br />
-            <span className="page-hero__accent">since 1989.</span>
+            <span className="page-hero__accent">since 2003.</span>
           </h1>
           <p className="page-hero__description">
-            Three decades of building rugged, high-efficiency motors engineered
+            Two decades of building rugged, high-efficiency motors engineered
             for India's demanding industrial and agricultural conditions.
           </p>
         </div>
@@ -101,16 +101,17 @@ export default function About() {
           <div className="about-story__text">
             <span className="section-label">WHO WE ARE</span>
             <h2 className="about-story__title">
-              A Maharashtra-built manufacturer trusted across India.
+              A Coimbatore-built manufacturer trusted across India.
             </h2>
             <p>
-              SLG Motors designs and manufactures AC induction, servo, BLDC,
-              flameproof and brake motors — alongside pumps, compressors and
-              high-pressure wash systems — for industrial, agricultural and
-              infrastructure applications nationwide.
+              Sree Lakshmi Ganapathy Engg. Industries (SLG Motors) designs and
+              manufactures AC induction, servo, BLDC, flameproof and brake
+              motors — alongside pumps, compressors and high-pressure wash
+              systems — for industrial, agricultural and infrastructure
+              applications nationwide.
             </p>
             <p>
-              From a single rewinding workshop founded in 1989, we have grown
+              From a single rewinding workshop founded in 2003, we have grown
               into an integrated facility that winds, machines, assembles and
               tests motors in-house. That vertical control is how we hold
               quality steady while serving everyone from local OEMs to national

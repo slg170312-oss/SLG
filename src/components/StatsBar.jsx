@@ -1,7 +1,7 @@
 const stats = [
   { value: '2,400+', label: 'Motor Variants' },
   { value: '38', label: 'States Served' },
-  { value: '35 yr', label: 'Manufacturing Experience' },
+  { value: '20+ yr', label: 'Manufacturing Experience' },
   { value: 'ISO 9001', suffix: ':2015 Certified', label: '' },
 ];
 

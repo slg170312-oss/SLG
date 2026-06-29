@@ -256,6 +256,7 @@ export default function Contact() {
                       {categories.map((category) => (
                         <option key={category.id} value={category.name}>{category.name}</option>
                       ))}
+                      <option value="Custom Build (Bulk Order)">Custom Build (Bulk Order)</option>
                       <option value="Other">Other / Not sure</option>
                     </select>
                   </div>

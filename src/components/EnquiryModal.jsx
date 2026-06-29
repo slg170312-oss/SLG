@@ -229,6 +229,7 @@ export default function EnquiryModal({ onClose, prefillProduct = '' }) {
                       {category.name}
                     </option>
                   ))}
+                  <option value="Custom Build (Bulk Order)">Custom Build (Bulk Order)</option>
                   <option value="Other">Other / Not sure</option>
                 </select>
               </div>
