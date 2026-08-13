@@ -1,7 +1,7 @@
 const features = [
-  { value: '0.18 kW – 315 kW', label: 'Power Range' },
-  { value: 'IP55 / IP65', label: 'Protection Class' },
-  { value: '-20°C to +60°C', label: 'Ambient Temp Range' },
+  { value: '0.18 kW – 75 kW', label: 'Power Range' },
+  { value: 'IP44 / IP55', label: 'Protection Class' },
+  { value: '20°C to 45°C', label: 'Ambient Temp Range' },
   { value: '48h Dispatch', label: 'Standard Stock Items' },
 ];
 

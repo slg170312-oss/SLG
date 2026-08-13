@@ -10,7 +10,7 @@ import usePageMeta from '../hooks/usePageMeta';
 export default function ProductsPage() {
   usePageMeta(
     'Products',
-    'Browse the SLG Motors industrial range — AC induction, servo, BLDC, flameproof and brake motors, borewell pumps, air compressors and car & bike wash systems.',
+    'Browse the SLG Motors industrial range — single phase, three phase, flange-mounted and loom-duty AC induction motors, borewell pumps, air compressors and car & bike wash systems.',
   );
 
   const [searchParams] = useSearchParams();

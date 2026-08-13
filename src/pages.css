@@ -117,7 +117,7 @@
   align-items: center;
   justify-content: center;
   background:
-    url('https://images.unsplash.com/photo-1565043666747-69f6646db940?w=1920&q=80') center / cover no-repeat;
+    url('https://images.pexels.com/photos/11951215/pexels-photo-11951215.jpeg?w=1920') center / cover no-repeat;
   text-align: center;
 }
 
@@ -162,11 +162,11 @@
 }
 
 .about-story__inner {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 4rem;
-  align-items: start;
   padding: 5rem 2rem;
+}
+
+.about-story__text {
+  max-width: 760px;
 }
 
 .about-story__title {
@@ -185,48 +185,11 @@
   margin-bottom: 1rem;
 }
 
-.timeline {
-  position: relative;
-  margin: 0;
-  padding-left: 1.5rem;
-  list-style: none;
-  border-left: 2px solid rgba(37, 99, 235, 0.25);
-}
-
-.timeline__item {
-  position: relative;
-  padding-bottom: 1.5rem;
-}
-
-.timeline__item:last-child {
-  padding-bottom: 0;
-}
-
-.timeline__item::before {
-  content: '';
-  position: absolute;
-  left: calc(-1.5rem - 6px);
-  top: 4px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--color-blue);
-  border: 2px solid var(--color-gray-100);
-}
-
-.timeline__year {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  color: var(--color-blue);
-  margin-bottom: 0.25rem;
-}
-
-.timeline__text {
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--color-gray-600);
+/* Prevent the trailing paragraph's margin from leaking past the section
+   (the .container override zeroes section padding) and revealing the navy
+   body background as a stray line above the next section. */
+.about-story__text p:last-child {
+  margin-bottom: 0;
 }
 
 .about-capabilities {
@@ -337,16 +300,79 @@
   color: var(--color-gray-500);
 }
 
+/* ── Company fact sheet ── */
+.about-factsheet {
+  background: var(--color-white);
+  color: var(--color-navy);
+}
+
+.about-factsheet__inner {
+  padding: 5rem 2rem;
+}
+
+.about-factsheet__title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+  color: var(--color-navy);
+}
+
+/* Hairline grid: 1px gap over a tinted background renders crisp dividers. */
+.factsheet {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.factsheet__item {
+  background: var(--color-white);
+  padding: 1.375rem 1.5rem;
+  transition: background 0.25s ease;
+}
+
+.factsheet__item:hover {
+  background: var(--color-gray-100);
+}
+
+.factsheet__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+  margin-bottom: 0.4rem;
+}
+
+.factsheet__value {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--color-navy);
+}
+
 /* ── About / shared responsive ── */
 @media (max-width: 900px) {
-  .about-story__inner {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
   .capability-grid,
   .cert-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .factsheet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-story__inner,
+  .about-capabilities__inner,
+  .about-certs__inner,
+  .about-factsheet__inner {
+    padding: 4rem 2rem;
   }
 }
 
@@ -356,9 +382,14 @@
     grid-template-columns: 1fr;
   }
 
+  .factsheet {
+    grid-template-columns: 1fr;
+  }
+
   .about-story__inner,
   .about-capabilities__inner,
-  .about-certs__inner {
+  .about-certs__inner,
+  .about-factsheet__inner {
     padding: 3.5rem 1.5rem;
   }
 }
@@ -506,6 +537,7 @@ a.contact-card__value:hover {
   .contact-body__inner {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+    padding: 4rem 2rem;
   }
 }
 
@@ -570,6 +602,12 @@ a.contact-card__value:hover {
 .legal-section__text a {
   color: var(--color-blue);
   font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .legal-body__inner {
+    padding: 3rem 2rem 3.5rem;
+  }
 }
 
 @media (max-width: 640px) {

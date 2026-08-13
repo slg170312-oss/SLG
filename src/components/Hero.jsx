@@ -21,9 +21,10 @@ export default function Hero() {
             <span className="hero__title-accent">for India.</span>
           </h1>
           <p className="hero__description">
-            SLG manufactures high-efficiency AC Induction, servo, and BLDC motors for
-            industrial, agricultural, and infrastructure applications across India —
-            engineered to IEC standards, certified to BIS norms.
+            SLG manufactures high-efficiency AC Induction motors — single phase,
+            three phase, flange-mounted and loom-duty — for industrial and
+            textile applications across India, engineered to IEC standards and
+            certified to BIS norms.
           </p>
           <div className="hero__actions">
             <Link to="/products" className="btn btn--primary">

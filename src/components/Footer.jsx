@@ -55,12 +55,11 @@ export default function Footer() {
             Manage cookies or opt out
           </button>
           <span className="footer__company">
-            © {new Date().getFullYear()} {siteConfig.legalName} · CIN {siteConfig.cin}
+            © {new Date().getFullYear()} {siteConfig.legalName} · MSME (Udyam Registered)
           </span>
         </div>
         <nav className="footer__nav" aria-label="Legal">
           <Link to="/privacy">Privacy Policy</Link>
-          <Link to="/terms">Terms of Sale</Link>
           <Link to="/contact">Dealer Locator</Link>
         </nav>
       </div>

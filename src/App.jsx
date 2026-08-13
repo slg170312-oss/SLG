@@ -28,7 +28,6 @@ export default function App() {
           <Route path="/custom" element={<Custom />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<LegalPage page="privacy" />} />
-          <Route path="/terms" element={<LegalPage page="terms" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

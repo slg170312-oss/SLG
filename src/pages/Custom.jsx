@@ -73,7 +73,6 @@ const parameters = [
   { title: 'Frame & Mounting', sub: 'Foot (B3), flange (B5/B14) and combined mountings; standard and special frame sizes.' },
   { title: 'IP & Insulation', sub: 'Enclosure protection and insulation class specified to the operating environment and ambient temperature.' },
   { title: 'Shaft & Coupling', sub: 'Shaft diameters, lengths, keyways and coupling profiles cut to drawing.' },
-  { title: 'Finish & Nameplate', sub: 'Paint shade, branded nameplates and customer-specific identification for OEM supply.' },
   { title: 'Motor + Pump Sets', sub: 'Matched motor, pump and panel packages — wound, assembled and tested as one unit before dispatch.' },
 ];
 

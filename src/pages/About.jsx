@@ -1,14 +1,7 @@
 import { Link } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import { useEnquiry } from '../context/EnquiryContext';
-
-const milestones = [
-  { year: '2003', text: 'Founded in Coimbatore as a motor rewinding and repair workshop.' },
-  { year: '2009', text: 'Commissioned the first in-house winding and assembly lines.' },
-  { year: '2015', text: 'Certified to ISO 9001 with BIS approvals across the core range.' },
-  { year: '2020', text: 'Expanded into IE3/IE4 high-efficiency and BLDC motor platforms.' },
-  { year: 'Today', text: 'Supplying OEMs, EPCs and distributors across 38 states.' },
-];
+import { siteConfig } from '../data/siteConfig';
 
 const capabilities = [
   {
@@ -23,7 +16,7 @@ const capabilities = [
   },
   {
     title: 'Precision Machining',
-    text: 'CNC-machined shafts, end shields and housings held to tight dimensional tolerances.',
+    text: 'Shafts, end shields and housings machined to tight tolerances for dependable performance.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="3" />
@@ -43,8 +36,8 @@ const capabilities = [
     ),
   },
   {
-    title: 'Pan-India Supply',
-    text: 'A distributor and service network that keeps standard stock items moving within 48 hours.',
+    title: 'Fast Dispatch',
+    text: 'Standard stock items dispatched within 48 hours; bulk custom orders of 300+ units fulfilled within 3 weeks.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="9" />
@@ -56,9 +49,25 @@ const capabilities = [
 
 const certs = [
   { title: 'ISO 9001:2015', sub: 'Quality Management System' },
+  { title: 'ISO 14001', sub: 'Environmental Management System' },
+  { title: 'ISO 45001', sub: 'Occupational Health & Safety' },
   { title: 'BIS Certified', sub: 'IS 325 · IS 12615' },
-  { title: 'IE3 / IE4', sub: 'Premium & Super-Premium Efficiency' },
-  { title: 'CE · IECEx', sub: 'Export & Hazardous-area variants' },
+];
+
+// Company fact sheet — quick-scan B2B credentials.
+// NOTE: Udyam and GST numbers pending from client — shown as "available on request" until provided.
+const factSheet = [
+  { label: 'Nature of Business', value: 'Manufacturer & Supplier' },
+  { label: 'Year of Establishment', value: String(siteConfig.established) },
+  { label: 'Legal Status', value: 'MSME (Udyam Registered)' },
+  { label: 'Head Office', value: 'Coimbatore, Tamil Nadu, India' },
+  { label: 'Product Portfolio', value: 'Electric Motors · Pumps · Compressors · Washers' },
+  { label: 'Quality Certifications', value: 'ISO 9001:2015 · ISO 14001 · ISO 45001 · BIS Certified' },
+  { label: 'Markets Served', value: '10 states across India' },
+  { label: 'Team Strength', value: '50+ skilled professionals' },
+  { label: 'Key Customers', value: 'OEMs · EPC Contractors · Distributors · Government Departments · Industrial Buyers' },
+  { label: 'Udyam Registration No.', value: 'Available on request' },
+  { label: 'GST No.', value: 'Available on request' },
 ];
 
 export default function About() {
@@ -91,7 +100,7 @@ export default function About() {
           </h1>
           <p className="page-hero__description">
             Two decades of building rugged, high-efficiency motors engineered
-            for India's demanding industrial and agricultural conditions.
+            for India's demanding industrial conditions.
           </p>
         </div>
       </section>
@@ -105,27 +114,42 @@ export default function About() {
             </h2>
             <p>
               Sree Lakshmi Ganapathy Engg. Industries (SLG Motors) designs and
-              manufactures AC induction, servo, BLDC, flameproof and brake
-              motors — alongside pumps, compressors and high-pressure wash
-              systems — for industrial, agricultural and infrastructure
-              applications nationwide.
+              manufactures AC induction motors — single phase, three phase,
+              flange-mounted and loom-duty — alongside pumps, compressors and
+              high-pressure wash systems — for industrial, corporate and
+              government projects across India.
             </p>
             <p>
-              From a single rewinding workshop founded in 2003, we have grown
-              into an integrated facility that winds, machines, assembles and
-              tests motors in-house. That vertical control is how we hold
-              quality steady while serving everyone from local OEMs to national
-              EPC contractors.
+              Founded in 2003 by an entrepreneur with hands-on experience in
+              motor manufacturing, SLG started independently from a small base
+              in rural Tamil Nadu. That single effort has grown into a team of
+              50+ skilled professionals playing a major role across 5–8
+              districts in Tamil Nadu, with a growing customer base spanning
+              10 states.
+            </p>
+            <p>
+              As a purely B2B manufacturer, we work directly with companies,
+              corporates and government departments on state and central
+              projects — one of the few in our segment doing government
+              contract work. Our in-house manufacturing process and refusal to
+              compromise on quality is what keeps new bulk-order customers
+              coming to us.
             </p>
           </div>
-          <ol className="timeline" aria-label="Company milestones">
-            {milestones.map((m) => (
-              <li key={m.year} className="timeline__item">
-                <span className="timeline__year">{m.year}</span>
-                <span className="timeline__text">{m.text}</span>
-              </li>
+        </div>
+      </section>
+
+      <section className="about-factsheet">
+        <div className="about-factsheet__inner container">
+          <h2 className="about-factsheet__title">Company fact sheet</h2>
+          <dl className="factsheet">
+            {factSheet.map((fact) => (
+              <div key={fact.label} className="factsheet__item">
+                <dt className="factsheet__label">{fact.label}</dt>
+                <dd className="factsheet__value">{fact.value}</dd>
+              </div>
             ))}
-          </ol>
+          </dl>
         </div>
       </section>
 

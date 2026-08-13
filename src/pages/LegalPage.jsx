@@ -21,35 +21,11 @@ const CONTENT = {
       },
       {
         title: 'Where it is stored',
-        text: 'Submissions are recorded in a private spreadsheet accessible only to authorised SLG Motors personnel and are reviewed manually before any follow-up.',
+        text: 'Submissions are recorded in a secure internal system accessible only to authorised SLG Motors personnel and are reviewed manually before any follow-up.',
       },
       {
         title: 'Your choices',
         text: 'You may request access to, correction of, or deletion of the information you have shared at any time by writing to us.',
-      },
-    ],
-  },
-  terms: {
-    title: 'Terms of Sale',
-    crumb: 'TERMS OF SALE',
-    label: 'COMMERCIAL TERMS · SLG MOTORS',
-    meta: 'A summary of the terms under which SLG Motors quotes, supplies and warrants its products.',
-    sections: [
-      {
-        title: 'Quotations',
-        text: 'Prices, lead times and availability shared in response to an enquiry are indicative and confirmed only on a formal proforma invoice or order acknowledgement.',
-      },
-      {
-        title: 'Specifications',
-        text: 'Product specifications are subject to continuous improvement and may change without prior notice. Always confirm critical ratings against the latest datasheet at the time of order.',
-      },
-      {
-        title: 'Warranty',
-        text: 'Products carry the standard SLG Motors manufacturing warranty against defects in material and workmanship, subject to correct installation and rated operating conditions.',
-      },
-      {
-        title: 'Orders & dispatch',
-        text: 'Standard stock items are typically dispatched within 48 hours of confirmed order; made-to-order variants are scheduled at the time of acknowledgement.',
       },
     ],
   },
