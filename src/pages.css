@@ -271,9 +271,14 @@
   padding: 5rem 2rem;
 }
 
+.about-certs--stacked .about-certs__inner {
+  padding-top: 1.5rem;
+}
+
 .cert-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -287,6 +292,8 @@
   border-top: 3px solid var(--color-blue);
   border-radius: 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  flex: 0 1 calc(25% - 0.75rem);
+  min-width: 220px;
 }
 
 .cert-card__title {
@@ -298,6 +305,60 @@
 .cert-card__sub {
   font-size: 0.8125rem;
   color: var(--color-gray-500);
+}
+
+.standards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 1.25rem;
+}
+
+.standards-grid__item {
+  display: flex;
+  gap: 0.75rem;
+  flex: 0 1 calc(25% - 0.9375rem);
+  min-width: 240px;
+}
+
+.standards-grid__icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  color: var(--color-blue);
+}
+
+.standards-grid__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 0 0 0.25rem;
+}
+
+.standards-grid__body {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-gray-500);
+  margin: 0;
+}
+
+.standards-grid__toggle {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.625rem 1.25rem;
+  background: none;
+  border: 1px solid var(--color-blue);
+  border-radius: 4px;
+  color: var(--color-blue);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.standards-grid__toggle:hover {
+  background: var(--color-blue);
+  color: var(--color-white);
 }
 
 /* ── Company fact sheet ── */
@@ -359,9 +420,16 @@
 
 /* ── About / shared responsive ── */
 @media (max-width: 900px) {
-  .capability-grid,
-  .cert-grid {
+  .capability-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cert-card {
+    flex-basis: calc(50% - 0.5rem);
+  }
+
+  .standards-grid__item {
+    flex-basis: calc(50% - 0.625rem);
   }
 
   .factsheet {
@@ -377,9 +445,16 @@
 }
 
 @media (max-width: 640px) {
-  .capability-grid,
-  .cert-grid {
+  .capability-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cert-card {
+    flex-basis: 100%;
+  }
+
+  .standards-grid__item {
+    flex-basis: 100%;
   }
 
   .factsheet {
@@ -423,6 +498,14 @@
   flex-direction: column;
   gap: 1rem;
   margin: 0;
+}
+
+.contact-map {
+  width: 100%;
+  height: 260px;
+  margin-top: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
 }
 
 .contact-card {
@@ -634,9 +717,14 @@ a.contact-card__value:hover {
 }
 
 /* ── Custom Manufacturing page ── */
-.custom-page .capability-grid,
-.custom-page .cert-grid {
+.custom-page .capability-grid {
   grid-template-columns: repeat(3, 1fr);
+}
+
+@media (min-width: 901px) {
+  .custom-page .cert-card {
+    flex-basis: calc(33.333% - 0.667rem);
+  }
 }
 
 .custom-intro {
@@ -704,7 +792,6 @@ a.contact-card__value:hover {
 
 @media (max-width: 900px) {
   .custom-page .capability-grid,
-  .custom-page .cert-grid,
   .process-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -712,7 +799,6 @@ a.contact-card__value:hover {
 
 @media (max-width: 640px) {
   .custom-page .capability-grid,
-  .custom-page .cert-grid,
   .process-grid {
     grid-template-columns: 1fr;
   }

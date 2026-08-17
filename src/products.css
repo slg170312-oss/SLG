@@ -598,6 +598,13 @@
   margin-bottom: 1.25rem;
 }
 
+.variant-detail__note {
+  color: var(--color-gray-600);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
 .spec-table__row {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
@@ -619,6 +626,96 @@
 .spec-table__value {
   color: var(--color-navy);
   font-weight: 500;
+}
+
+.model-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.model-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.model-table th,
+.model-table td {
+  padding: 0.625rem 0.875rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.variant-detail__standards-link {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  color: var(--color-blue);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.variant-detail__standards-link:hover {
+  text-decoration: underline;
+}
+
+.model-table__caption {
+  text-align: left;
+  caption-side: top;
+  padding-bottom: 0.625rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  font-size: 0.9375rem;
+}
+
+.model-table thead th {
+  background: var(--color-blue);
+  color: white;
+  font-weight: 600;
+}
+
+.model-table__unit {
+  display: block;
+  font-weight: 400;
+  font-size: 0.6875rem;
+  opacity: 0.85;
+}
+
+.model-table__subhead {
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+.model-table tbody td {
+  border-color: rgba(0, 0, 0, 0.08);
+  color: var(--color-navy);
+  font-weight: 500;
+}
+
+.model-table tbody td:first-child {
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.model-table tbody tr:nth-child(even) td {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.model-table tbody tr:nth-child(even) td:first-child {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.model-table--kv td {
+  text-align: left;
+  white-space: normal;
+}
+
+.model-table--kv .model-table__kv-label {
+  width: 40%;
+  color: var(--color-gray-600);
 }
 
 .variant-detail__cert {

@@ -153,6 +153,14 @@ export default function Contact() {
                 </div>
               </li>
             </ul>
+
+            <iframe
+              className="contact-map"
+              title="SLG Motors factory & office location"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(`${siteConfig.address.line1}, ${siteConfig.address.line2}, ${siteConfig.address.country}`)}&output=embed`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
 
           <div className="contact-form-wrap">

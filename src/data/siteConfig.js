@@ -36,3 +36,7 @@ export const siteConfig = {
 // Phone as a clean tel: href (strip spaces and punctuation except leading +).
 export const telHref = `tel:${siteConfig.phone.replace(/[^\d+]/g, '')}`;
 export const mailHref = `mailto:${siteConfig.email}`;
+
+// Base site URL — used to build per-page canonical links. Matches the
+// origin already used for OG/Twitter tags and the sitemap in index.html.
+export const siteUrl = 'https://sreelakshmiganapathyengg.netlify.app';

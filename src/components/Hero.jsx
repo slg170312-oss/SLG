@@ -12,7 +12,7 @@ export default function Hero() {
         <div className="hero__content container">
           <div className="hero__label">
             <span className="hero__label-line" />
-            <span>EST. 2003 · MADE IN INDIA · BHARAT STANDARDS</span>
+            <span>EST. 2003 · MADE IN INDIA</span>
             <span className="hero__label-line" />
           </div>
           <h1 className="hero__title">

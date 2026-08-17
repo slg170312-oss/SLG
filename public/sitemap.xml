@@ -2,37 +2,151 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sreelakshmiganapathyengg.netlify.app/</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sreelakshmiganapathyengg.netlify.app/products</loc>
-    <lastmod>2026-07-26</lastmod>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/electric-motors/single-phase-b-class</loc>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/electric-motors/three-phase</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/electric-motors/loom-motor</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/pumps/self-priming</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/pumps/openwell-submersible-vertical</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/pumps/openwell-submersible</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/pumps/borewell-submersible</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/pumps/borewell-submersible-150-200mm</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/pumps/dms-monoblock</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/pumps/monoblock-pump</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/pumps/control-panel</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/air-compressors/single-stage</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/air-compressors/two-stage</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/air-compressors/borewell-compressor</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/air-compressors/monoblock-compressor</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/wash-motors/sdw-01</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/wash-motors/sdw-1-5</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/wash-motors/sdw-02</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/wash-motors/sdw-03</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sreelakshmiganapathyengg.netlify.app/products/wash-motors/sdw-30-05</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://sreelakshmiganapathyengg.netlify.app/custom</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://sreelakshmiganapathyengg.netlify.app/about</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://sreelakshmiganapathyengg.netlify.app/contact</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://sreelakshmiganapathyengg.netlify.app/privacy</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

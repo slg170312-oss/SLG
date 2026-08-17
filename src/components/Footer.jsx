@@ -30,7 +30,7 @@ export default function Footer() {
         <nav className="footer__col" aria-label="Product links">
           <h4 className="footer__heading">Products</h4>
           {categories.map((c) => (
-            <Link key={c.id} to={`/products?category=${c.id}`}>
+            <Link key={c.id} to={`/products/${c.id}/${c.variants[0].id}`}>
               {c.name}
             </Link>
           ))}

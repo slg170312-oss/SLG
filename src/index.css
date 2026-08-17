@@ -149,6 +149,15 @@ button {
   color: var(--color-white);
 }
 
+.topbar__contact-item--highlight {
+  color: var(--color-blue-bright);
+  font-weight: 700;
+}
+
+.topbar__contact-item--highlight:hover {
+  color: var(--color-white);
+}
+
 .topbar__divider {
   color: var(--color-gray-600);
 }

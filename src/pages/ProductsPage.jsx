@@ -1,5 +1,5 @@
-import { useState, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useRef } from 'react';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { categories } from '../data/productCategories';
 import CategoryHero from '../components/products/CategoryHero';
 import CategoryCover from '../components/products/CategoryCover';
@@ -8,43 +8,51 @@ import ProductsCTA from '../components/products/ProductsCTA';
 import usePageMeta from '../hooks/usePageMeta';
 
 export default function ProductsPage() {
+  const { categorySlug, variantSlug } = useParams();
+  const navigate = useNavigate();
+
+  const activeCategory = categories.find((c) => c.id === categorySlug) ?? categories[0];
+  const selectedVariant =
+    activeCategory.variants.find((v) => v.id === variantSlug) ?? activeCategory.variants[0];
+
   usePageMeta(
-    'Products',
-    'Browse the SLG Motors industrial range — single phase, three phase, flange-mounted and loom-duty AC induction motors, borewell pumps, air compressors and car & bike wash systems.',
+    `${selectedVariant.name} — ${activeCategory.name}`,
+    `${selectedVariant.name} from SLG — ${selectedVariant.tags?.join(' · ') || activeCategory.name}. Real specifications, get a quote or download the datasheet.`,
   );
 
-  const [searchParams] = useSearchParams();
-  const paramCategory = categories.find((c) => c.id === searchParams.get('category'));
-  const initialCategory = paramCategory ?? categories[0];
-
-  const [activeCategoryId, setActiveCategoryId] = useState(initialCategory.id);
-  const [selectedVariant, setSelectedVariant] = useState(initialCategory.variants[0]);
-
-  const activeCategory = categories.find((c) => c.id === activeCategoryId) ?? categories[0];
-
   const handleCategoryChange = (categoryId) => {
-    setActiveCategoryId(categoryId);
     const nextCategory = categories.find((c) => c.id === categoryId) ?? categories[0];
-    setSelectedVariant(nextCategory.variants[0]);
+    navigate(`/products/${categoryId}/${nextCategory.variants[0].id}`);
   };
 
   const detailRef = useRef(null);
 
   const handleVariantSelect = (variant) => {
-    const next = selectedVariant?.id === variant.id ? null : variant;
-    setSelectedVariant(next);
-    if (next) {
-      setTimeout(() => {
-        detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 100);
-    }
+    navigate(`/products/${activeCategory.id}/${variant.id}`);
+    setTimeout(() => {
+      detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
   };
+
+  const handleVariantNavigate = (variant) => {
+    navigate(`/products/${activeCategory.id}/${variant.id}`);
+  };
+
+  const categoryExists = categories.some((c) => c.id === categorySlug);
+  if (!categorySlug || !categoryExists) {
+    return <Navigate to={`/products/${categories[0].id}/${categories[0].variants[0].id}`} replace />;
+  }
+
+  const variantExists = activeCategory.variants.some((v) => v.id === variantSlug);
+  if (!variantSlug || !variantExists) {
+    return <Navigate to={`/products/${activeCategory.id}/${activeCategory.variants[0].id}`} replace />;
+  }
 
   return (
     <div className="products-page">
       <CategoryHero
         categories={categories}
-        activeCategoryId={activeCategoryId}
+        activeCategoryId={activeCategory.id}
         onCategoryChange={handleCategoryChange}
       />
       <CategoryCover
@@ -59,7 +67,7 @@ export default function ProductsPage() {
           variant={selectedVariant}
           category={activeCategory}
           variants={activeCategory.variants}
-          onSelectVariant={setSelectedVariant}
+          onSelectVariant={handleVariantNavigate}
         />
       </div>
       <ProductsCTA />

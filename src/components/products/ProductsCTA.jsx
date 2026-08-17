@@ -10,7 +10,7 @@ export default function ProductsCTA() {
       <div className="products-cta__content container">
         <span className="section-label">Wholesale &amp; Corporate Enquiries</span>
         <h2 className="products-cta__title">
-          Volume pricing for OEMs, EPCs &amp; distributors.
+          Volume pricing for OEMs &amp; distributors.
         </h2>
         <div className="page-cta__actions">
           <button

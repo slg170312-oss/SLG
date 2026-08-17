@@ -1,6 +1,67 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import usePageMeta from '../hooks/usePageMeta';
 import { useEnquiry } from '../context/EnquiryContext';
+import { categories } from '../data/productCategories';
+
+const motorGeneralSpecs = categories.find((c) => c.id === 'electric-motors')?.generalSpecs;
+
+const STANDARDS_ICONS = {
+  'Standards': <path d="M12 8a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M9 12.5L7 21l5-3 5 3-2-8.5" />,
+  'Duty & Ratings': <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></>,
+  'Voltage & Frequency': <path d="M13 2L4 14h7l-1 8 9-12h-7z" />,
+  'Insulation System': <path d="M12 3l7 3v6c0 4.5-3.5 7.5-7 9-3.5-1.5-7-4.5-7-9V6l7-3z" />,
+  'Degree of Protection': <><path d="M12 3l7 3v6c0 4.5-3.5 7.5-7 9-3.5-1.5-7-4.5-7-9V6l7-3z" /><path d="M9 12l2 2 4-4" /></>,
+  'Terminal Box & Earthing': <><path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-6 6 6 6 0 0 1-6-6V8z" /><path d="M12 18v4" /></>,
+  'Cooling & Noise': <><path d="M3 8h11a3 3 0 1 0-3-3" /><path d="M3 16h15a3 3 0 1 1-3 3" /></>,
+  'Bearing System': <><circle cx="12" cy="12" r="4" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3" /></>,
+  'Construction & Mounting': <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2z" />,
+  'Material & Finish': <><path d="M12 3l9 5-9 5-9-5 9-5z" /><path d="M3 13l9 5 9-5" /></>,
+  'Features': <path d="M12 2l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17l-6.1 3.5 1.5-6.8-5.2-4.7 6.9-.7z" />,
+};
+
+const STANDARDS_PREVIEW_COUNT = 4;
+
+function StandardsGrid({ sections }) {
+  const [showAll, setShowAll] = useState(false);
+  const visibleSections = showAll ? sections : sections.slice(0, STANDARDS_PREVIEW_COUNT);
+
+  return (
+    <>
+      <div className="standards-grid">
+        {visibleSections.map((section) => (
+          <div key={section.heading} className="standards-grid__item">
+            <svg
+              className="standards-grid__icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              {STANDARDS_ICONS[section.heading]}
+            </svg>
+            <div>
+              <p className="standards-grid__title">{section.heading}</p>
+              <p className="standards-grid__body">{section.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      {sections.length > STANDARDS_PREVIEW_COUNT && (
+        <button
+          type="button"
+          className="standards-grid__toggle"
+          onClick={() => setShowAll((v) => !v)}
+        >
+          {showAll ? 'View less' : `View all (${sections.length})`}
+        </button>
+      )}
+    </>
+  );
+}
 
 const sectors = [
   {
@@ -57,7 +118,7 @@ const sectors = [
   },
   {
     title: 'Infrastructure',
-    text: 'High-pressure wash systems, compressor sets and pumping packages for EPC contractors, public works and utility projects.',
+    text: 'High-pressure wash systems, compressor sets and pumping packages for contractors, public works and utility projects.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M3 21h18" />
@@ -170,6 +231,16 @@ export default function Custom() {
           </div>
         </div>
       </section>
+
+      {motorGeneralSpecs && (
+        <section className="about-certs about-certs--stacked">
+          <div className="about-certs__inner container">
+            <span className="section-label">ENGINEERING STANDARDS</span>
+            <h2 className="about-certs__title">Standards we build to</h2>
+            <StandardsGrid sections={motorGeneralSpecs.sections} />
+          </div>
+        </section>
+      )}
 
       <section className="about-capabilities">
         <div className="about-capabilities__inner container">

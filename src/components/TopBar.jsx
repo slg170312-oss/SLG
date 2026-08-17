@@ -33,17 +33,17 @@ export default function TopBar() {
         <div className="topbar__contact">
           <span className="topbar__label">CONTACT</span>
           <span className="topbar__divider" aria-hidden="true">·</span>
-          <a className="topbar__contact-item" href={mailHref}>
+          <a className="topbar__contact-item topbar__contact-item--highlight" href={mailHref}>
             {siteConfig.email}
           </a>
           <span className="topbar__divider" aria-hidden="true">·</span>
-          <a className="topbar__contact-item" href={telHref}>
+          <a className="topbar__contact-item topbar__contact-item--highlight" href={telHref}>
             {siteConfig.phone}
           </a>
           {siteConfig.phoneAlt && (
             <>
               <span className="topbar__divider" aria-hidden="true">·</span>
-              <a className="topbar__contact-item" href={`tel:${siteConfig.phoneAlt.replace(/[^\d+]/g, '')}`}>
+              <a className="topbar__contact-item topbar__contact-item--highlight" href={`tel:${siteConfig.phoneAlt.replace(/[^\d+]/g, '')}`}>
                 {siteConfig.phoneAlt}
               </a>
             </>

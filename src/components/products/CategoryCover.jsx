@@ -37,7 +37,7 @@ export default function CategoryCover({ category, selectedVariant, onSelectVaria
               onClick={() => onSelectVariant(variant)}
             >
               <div className="variant-card__image-wrap">
-                <img src={variant.image} alt={variant.name} className="variant-card__image" />
+                <img src={variant.image} alt={variant.imageAlt || variant.name} className="variant-card__image" />
                 {variant.badge && (
                   <span className="variant-card__badge">{variant.badge}</span>
                 )}
