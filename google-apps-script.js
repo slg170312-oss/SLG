@@ -9,6 +9,27 @@
 const SHEET_NAME = 'Sheet1'; // Change if your sheet tab has a different name
 const NOTIFY_EMAIL = 'slg170312@gmail.com'; // TEMPORARY test address — replace with official company email later
 
+// Google Sheets treats a cell starting with =, +, -, @, tab or CR as a
+// formula, not text. Without this, a submitted field like
+// =HYPERLINK("http://evil.example","Click me") becomes a live, clickable
+// formula the moment someone opens the sheet. Prefixing with an apostrophe
+// forces Sheets to store it as literal text instead.
+function sanitizeForSheet(value) {
+  const str = String(value == null ? '' : value);
+  return /^[=+\-@\t\r]/.test(str) ? "'" + str : str;
+}
+
+// The React form enforces these lengths client-side, but the endpoint is
+// public, so anyone can POST to it directly and skip that check. Truncating
+// here keeps the sheet from being flooded with oversized junk (and keeps the
+// notification email from ballooning) without rejecting genuine submissions,
+// which never exceed these lengths anyway.
+const FIELD_LIMITS = { name: 35, phone: 20, location: 500, email: 100, product: 100 };
+
+function clean(value, maxLength) {
+  return sanitizeForSheet(String(value == null ? '' : value).slice(0, maxLength));
+}
+
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
@@ -22,14 +43,17 @@ function doPost(e) {
     const timestamp = new Date();
 
     sheet.appendRow([
-      timestamp,             // A: Timestamp
-      data.name || '',      // B: Name
-      data.phone || '',     // C: Phone
-      data.location || '',  // D: Location
-      data.email || '',     // E: Email
-      data.product || '',   // F: Product
-      data.isActive,        // G: IsActive  (always 1 from React)
-      data.isVerified,      // H: IsVerified (always 0 from React)
+      timestamp,                                    // A: Timestamp
+      clean(data.name, FIELD_LIMITS.name),          // B: Name
+      clean(data.phone, FIELD_LIMITS.phone),        // C: Phone
+      clean(data.location, FIELD_LIMITS.location),  // D: Location
+      clean(data.email, FIELD_LIMITS.email),        // E: Email
+      clean(data.product, FIELD_LIMITS.product),    // F: Product
+      1,                                             // G: IsActive (always 1)
+      0,                                             // H: IsVerified — always starts
+                                                      //    unverified; only set to 1 by
+                                                      //    editing the sheet directly,
+                                                      //    never trusted from the request
     ]);
 
     // Email is a convenience on top of the sheet write, which is the
@@ -54,7 +78,11 @@ function doPost(e) {
 
     return json({ status: 'ok' });
   } catch (err) {
-    return json({ status: 'error', message: err.toString() });
+    // Log the real error for debugging (visible in Apps Script's own
+    // execution log), but don't echo internal error details back to
+    // whoever called the endpoint.
+    console.error(err);
+    return json({ status: 'error', message: 'Submission failed. Please try again.' });
   }
 }
 
