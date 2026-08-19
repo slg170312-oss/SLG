@@ -9,9 +9,9 @@ export default function Footer() {
         <div className="footer__brand">
           <img src="/logo.png" alt="SLG Motors" className="footer__logo" />
           <p className="footer__tagline">
-            High-efficiency industrial motors, pumps, compressors and wash
-            systems — engineered to IEC standards and BIS certified. Made in
-            India since {siteConfig.established}.
+            High-efficiency industrial motors, pumps, compressors and vehicle
+            wash systems — engineered to Indian Standards. Made in India
+            since {siteConfig.established}.
           </p>
         </div>
 

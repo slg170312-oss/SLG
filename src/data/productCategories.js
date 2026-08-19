@@ -11,7 +11,7 @@ export const categories = [
     label: 'CORE RANGE',
     title: 'Single, Three Phase & Special Motors',
     description:
-      'Cast-iron AC induction motors wound, assembled and tested in-house at Coimbatore — single phase, three phase and loom-duty models for pumps, agriculture and textile machinery.',
+      'Cast-iron AC induction motors wound, assembled and tested in-house at Coimbatore — single-phase, three-phase and loom-duty models for pumps, agriculture and textile machinery.',
     coverImage: '/images/motors/three-phase-motor.webp',
     accent: '#2563eb',
     generalSpecs: {
@@ -68,7 +68,7 @@ export const categories = [
         },
         {
           heading: 'Degree of Protection',
-          body: 'Motors have IP44 degree of protection as a standard feature.',
+          body: 'Motors have an IP44 degree of protection as a standard feature.',
         },
         {
           heading: 'Terminal Box & Earthing',
@@ -84,7 +84,7 @@ export const categories = [
         },
         {
           heading: 'Construction & Mounting',
-          body: 'Standard motors with a single shaft extension are built for foot mounting (B3 as per IS 1231) and flange/face mounting (B5/B14 as per IS 2223). Foot-cum-flange and vertical/horizontal construction can be offered on request.',
+          body: 'Standard motors with a single shaft extension are built for foot mounting (B3 as per IS 1231), flange/face mounting (B5/B14 as per IS 2223) and foot-cum-flange (B35). Vertical and horizontal construction can be offered on request.',
         },
         {
           heading: 'Material & Finish',
@@ -92,7 +92,7 @@ export const categories = [
         },
         {
           heading: 'Features',
-          body: 'Energy efficient · easy reversal of rotation for single phase motors · copper windings · dynamically balanced rotors.',
+          body: 'Energy-efficient · easy reversal of rotation for single-phase motors · copper windings · dynamically balanced rotors.',
         },
       ],
     },

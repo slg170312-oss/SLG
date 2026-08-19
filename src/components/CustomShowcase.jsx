@@ -15,9 +15,9 @@ export default function CustomShowcase() {
         </h2>
         <p className="custom-showcase__lead">
           Tell us the voltage, frame size, mounting and shaft you need, and we
-          build to that. Winding, machining, assembly and testing all happen in
-          our own factory — nothing is outsourced, and we never compromise on
-          quality, whatever the order size.
+          build to that. Winding, machining, assembly and testing are all done
+          in our own factory, start to finish. We never compromise on quality,
+          whatever the order size.
         </p>
         <div className="custom-showcase__actions">
           <Link to="/custom" className="btn btn--primary btn--lg">

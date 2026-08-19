@@ -59,7 +59,7 @@ const factSheet = [
   { label: 'Year of Establishment', value: String(siteConfig.established) },
   { label: 'Legal Status', value: 'MSME (Udyam Registered)' },
   { label: 'Head Office', value: 'Coimbatore, Tamil Nadu, India' },
-  { label: 'Product Portfolio', value: 'Electric Motors · Pumps · Compressors · Washers' },
+  { label: 'Product Portfolio', value: 'Motors · Pumps · Compressors · Washers' },
   { label: 'Quality Certifications', value: 'ISO 9001:2015 · BIS Certified' },
   { label: 'Markets Served', value: '10 states across India' },
   { label: 'Team Strength', value: '50+ skilled professionals' },
@@ -112,9 +112,9 @@ export default function About() {
             </h2>
             <p>
               Sree Lakshmi Ganapathy Engg. Industries (SLG Motors) designs and
-              manufactures AC induction motors — single phase, three phase,
+              manufactures AC induction motors — single-phase, three-phase,
               flange-mounted and loom-duty — alongside pumps, compressors and
-              high-pressure wash systems — for industrial, corporate and
+              high-pressure wash systems for industrial, corporate and
               government projects across India.
             </p>
             <p>
@@ -129,8 +129,8 @@ export default function About() {
               As a purely B2B manufacturer, we work directly with companies,
               corporates and government departments on state and central
               projects — one of the few in our segment doing government
-              contract work. Our in-house manufacturing process and refusal to
-              compromise on quality is what keeps new bulk-order customers
+              contract work. Our in-house manufacturing process and our refusal
+              to compromise on quality are what keep new bulk-order customers
               coming to us.
             </p>
           </div>

@@ -130,7 +130,7 @@ const sectors = [
 ];
 
 const parameters = [
-  { title: 'Windings & Voltage', sub: 'Single, three-phase and special winding builds — non-standard voltages and frequencies on request.' },
+  { title: 'Windings & Voltage', sub: 'Single-phase, three-phase and special winding builds — non-standard voltages and frequencies on request.' },
   { title: 'Frame & Mounting', sub: 'Foot (B3), flange (B5/B14) and combined mountings; standard and special frame sizes.' },
   { title: 'IP & Insulation', sub: 'Enclosure protection and insulation class specified to the operating environment and ambient temperature.' },
   { title: 'Shaft & Coupling', sub: 'Shaft diameters, lengths, keyways and coupling profiles cut to drawing.' },

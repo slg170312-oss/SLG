@@ -23,7 +23,7 @@ export default function CategoryHero({ categories, activeCategoryId, onCategoryC
           <span className="products-hero__accent">Categories.</span>
         </h1>
         <p className="products-hero__description">
-          Four industrial product lines — all engineered, assembled, and
+          Four industrial product lines, all engineered, assembled and
           quality-certified at our facility in Coimbatore.
         </p>
       </div>

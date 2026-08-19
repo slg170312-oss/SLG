@@ -15,9 +15,9 @@ export default function WhyChoose() {
             Engineering-grade motors built for Indian conditions.
           </h2>
           <p className="why-choose__description">
-            Designed for high ambient temperatures, voltage fluctuations, and dusty
-            environments — SLG motors run reliably across pumps, compressors,
-            conveyors, and CNC applications.
+            Designed for high ambient temperatures, voltage fluctuations and dusty
+            environments, SLG motors run reliably across pumps, compressors,
+            conveyors and CNC applications.
           </p>
         </div>
         <div className="feature-grid">
