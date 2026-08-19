@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import CertBadges from './CertBadges';
 import { useEnquiry } from '../context/EnquiryContext';
 
 export default function Hero() {
@@ -21,10 +20,12 @@ export default function Hero() {
             <span className="hero__title-accent">for India.</span>
           </h1>
           <p className="hero__description">
-            SLG manufactures high-efficiency AC Induction motors — single phase,
-            three phase, flange-mounted and loom-duty — for industrial and
-            textile applications across India, engineered to IEC standards and
-            certified to BIS norms.
+            SLG manufactures high-efficiency AC induction motors — single phase
+            and three phase, in <span className="nowrap">foot</span>,{' '}
+            <span className="nowrap">flange</span> and{' '}
+            <span className="nowrap">foot-cum-flange</span> mountings —
+            engineered to IEC standards for agricultural, industrial, textile
+            and general engineering applications across India.
           </p>
           <div className="hero__actions">
             <Link to="/products" className="btn btn--primary">
@@ -48,7 +49,6 @@ export default function Hero() {
             </button>
           </div>
         </div>
-        <CertBadges />
     </section>
   );
 }

@@ -72,7 +72,7 @@
   padding-top: calc(var(--header-height) + 3rem);
   padding-bottom: 0;
   background:
-    url('https://images.unsplash.com/photo-1772588063102-eed5af095b9e?w=1920&q=80') center / cover no-repeat;
+    url('/images/site/products-hero-stators.webp') center / cover no-repeat;
   overflow: hidden;
 }
 
@@ -982,7 +982,7 @@
   align-items: center;
   justify-content: center;
   background:
-    url('https://images.pexels.com/photos/11951215/pexels-photo-11951215.jpeg?w=1920') center / cover no-repeat;
+    url('/images/site/cta-rotor-closeup.webp') center / cover no-repeat;
   text-align: center;
 }
 

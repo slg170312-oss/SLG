@@ -23,10 +23,15 @@ export const siteConfig = {
     x: 'https://www.x.com/', // TODO: replace with the real profile URL once live
   },
   address: {
-    line1: '7/74, SKV Employees Colony, Kamatchi Puram',
-    line2: 'Coimbatore 641016',
+    line1: '7/74, SKV Employees Colony, Kamatchipuram',
+    line2: 'Ondipudur Post, Coimbatore, Tamil Nadu 641016',
     country: 'India',
   },
+  // Google's own listing for the works (11.0095591, 77.06524). Set explicitly
+  // rather than geocoded from the address above — neither Google nor
+  // OpenStreetMap resolves SKV Employees Colony, so a text search lands on the
+  // wrong part of Ondipudur.
+  mapsUrl: 'https://maps.app.goo.gl/GkAU8hFagm1QYVcMA',
   hours: [
     { days: 'Mon – Sat', time: '9:30 AM – 6:30 PM IST' },
     { days: 'Sunday', time: 'Closed' },

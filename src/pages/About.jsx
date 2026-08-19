@@ -49,8 +49,6 @@ const capabilities = [
 
 const certs = [
   { title: 'ISO 9001:2015', sub: 'Quality Management System' },
-  { title: 'ISO 14001', sub: 'Environmental Management System' },
-  { title: 'ISO 45001', sub: 'Occupational Health & Safety' },
   { title: 'BIS Certified', sub: 'IS 325 · IS 12615' },
 ];
 
@@ -62,10 +60,10 @@ const factSheet = [
   { label: 'Legal Status', value: 'MSME (Udyam Registered)' },
   { label: 'Head Office', value: 'Coimbatore, Tamil Nadu, India' },
   { label: 'Product Portfolio', value: 'Electric Motors · Pumps · Compressors · Washers' },
-  { label: 'Quality Certifications', value: 'ISO 9001:2015 · ISO 14001 · ISO 45001 · BIS Certified' },
+  { label: 'Quality Certifications', value: 'ISO 9001:2015 · BIS Certified' },
   { label: 'Markets Served', value: '10 states across India' },
   { label: 'Team Strength', value: '50+ skilled professionals' },
-  { label: 'Key Customers', value: 'OEMs · EPC Contractors · Distributors · Government Departments · Industrial Buyers' },
+  { label: 'Key Customers', value: 'OEMs · Distributors · Government Departments · Industrial Buyers' },
   { label: 'Udyam Registration No.', value: 'Available on request' },
   { label: 'GST No.', value: 'Available on request' },
 ];
@@ -79,7 +77,7 @@ export default function About() {
 
   return (
     <div className="page about-page">
-      <section className="page-hero">
+      <section className="page-hero page-hero--about">
         <div className="page-hero__overlay" aria-hidden="true" />
         <div className="page-hero__grid" aria-hidden="true" />
         <div className="page-hero__content container">

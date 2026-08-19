@@ -13,13 +13,10 @@ export default function Footer() {
             systems — engineered to IEC standards and BIS certified. Made in
             India since {siteConfig.established}.
           </p>
-          <span className="footer__certs">
-            ISO 9001:2015 · BIS CERTIFIED · IE3 EFFICIENCY
-          </span>
         </div>
 
         <nav className="footer__col" aria-label="Company links">
-          <h4 className="footer__heading">Company</h4>
+          <h3 className="footer__heading">Company</h3>
           <Link to="/">Home</Link>
           <Link to="/products">Products</Link>
           <Link to="/custom">Custom Manufacturing</Link>
@@ -28,7 +25,7 @@ export default function Footer() {
         </nav>
 
         <nav className="footer__col" aria-label="Product links">
-          <h4 className="footer__heading">Products</h4>
+          <h3 className="footer__heading">Products</h3>
           {categories.map((c) => (
             <Link key={c.id} to={`/products/${c.id}/${c.variants[0].id}`}>
               {c.name}
@@ -37,7 +34,7 @@ export default function Footer() {
         </nav>
 
         <div className="footer__col">
-          <h4 className="footer__heading">Get in touch</h4>
+          <h3 className="footer__heading">Get in touch</h3>
           <a href={mailHref}>{siteConfig.email}</a>
           <a href={telHref}>{siteConfig.phone}</a>
           {siteConfig.phoneAlt && (

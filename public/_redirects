@@ -1,1 +1,12 @@
-/*    /index.html   200
+# Vehicle washer products were renamed SDW-* to SLGW-*; their URLs followed.
+# 301 the old paths so existing links and any indexed pages land on the right
+# product instead of falling back to the top of the category.
+/products/wash-motors/sdw-01       /products/wash-motors/slgw-01       301
+/products/wash-motors/sdw-1-5      /products/wash-motors/slgw-1-5      301
+/products/wash-motors/sdw-02       /products/wash-motors/slgw-02       301
+/products/wash-motors/sdw-03       /products/wash-motors/slgw-03       301
+/products/wash-motors/sdw-30-05    /products/wash-motors/slgw-30-05    301
+
+# SPA fallback — every other path is handled by the client router.
+# Must stay last: rules are matched top-down.
+/*    /index.html    200

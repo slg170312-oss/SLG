@@ -64,7 +64,7 @@ export const categories = [
         },
         {
           heading: 'Insulation System',
-          body: "All standard motors are provided with Class 'B' insulation. Class 'A', 'H' or 'F' insulation can be offered on request.",
+          body: "All standard motors are provided with Class 'B' insulation. Class 'H' or 'F' insulation can be offered on request.",
         },
         {
           heading: 'Degree of Protection',
@@ -332,7 +332,7 @@ export const categories = [
       {
         id: 'single-stage',
         name: 'Single Stage Air Compressor',
-        badge: 'SD SERIES',
+        badge: 'SLG SERIES',
         image: '/images/compressors/single-stage.webp',
         tags: ['1 – 5 HP', 'up to 130 PSI'],
         specs: [],
@@ -403,7 +403,7 @@ export const categories = [
     specsAsTable: true,
     variants: [
       {
-        id: 'sdw-01',
+        id: 'slgw-01',
         name: 'SLGW-01 Vehicle Washer',
         badge: '2-WHEELER',
         image: '/images/washers/sdw-01.jpg',
@@ -423,7 +423,7 @@ export const categories = [
         ],
       },
       {
-        id: 'sdw-1-5',
+        id: 'slgw-1-5',
         name: 'SLGW-1.5 Vehicle Washer',
         image: '/images/washers/sdw-1-5.jpg',
         tags: ['1.5 HP', '10 – 11 LPM'],
@@ -442,7 +442,7 @@ export const categories = [
         ],
       },
       {
-        id: 'sdw-02',
+        id: 'slgw-02',
         name: 'SLGW-02 Vehicle Washer',
         badge: 'BESTSELLER',
         image: '/images/washers/sdw-02.jpg',
@@ -462,7 +462,7 @@ export const categories = [
         ],
       },
       {
-        id: 'sdw-03',
+        id: 'slgw-03',
         name: 'SLGW-03 Vehicle Washer',
         badge: '4-WHEELER',
         image: '/images/washers/sdw-03.jpg',
@@ -482,7 +482,7 @@ export const categories = [
         ],
       },
       {
-        id: 'sdw-30-05',
+        id: 'slgw-30-05',
         name: 'SLGW-30/05 Vehicle Washer',
         badge: 'HEAVY DUTY',
         image: '/images/washers/sdw-30-05.jpg',

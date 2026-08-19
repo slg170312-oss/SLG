@@ -8,6 +8,7 @@ import { submitEnquiry } from '../utils/enquiry';
 const NAME_MAX = 35;
 const PHONE_DIGITS = 10;
 const MESSAGE_MAX = 500;
+const MIN_FILL_MS = 2000;
 const EMAIL_PATTERN = '[^\\s@]+@[^\\s@]+\\.[^\\s@]+';
 
 const MailIcon = (
@@ -62,8 +63,13 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (Date.now() - openedAt.current < 2000) return; // time-gate spam check
     setStatus('submitting');
+    // Hold a too-fast submission back rather than dropping it silently — see the
+    // same guard in EnquiryModal.
+    const elapsed = Date.now() - openedAt.current;
+    if (elapsed < MIN_FILL_MS) {
+      await new Promise((resolve) => { setTimeout(resolve, MIN_FILL_MS - elapsed); });
+    }
     try {
       await submitEnquiry({
         name: form.name,
@@ -154,13 +160,30 @@ export default function Contact() {
               </li>
             </ul>
 
-            <iframe
-              className="contact-map"
-              title="SLG Motors factory & office location"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(`${siteConfig.address.line1}, ${siteConfig.address.line2}, ${siteConfig.address.country}`)}&output=embed`}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            <a
+              className="map-card"
+              href={siteConfig.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="map-card__scrim" aria-hidden="true" />
+              <span className="map-card__pin" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11z" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+              </span>
+              <span className="map-card__place">Ondipudur, Coimbatore</span>
+              <span className="map-card__address">{siteConfig.address.line1}</span>
+              <span className="map-card__cta">
+                Open in Google Maps
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              {/* ODbL requires visible credit for the OpenStreetMap basemap. */}
+              <span className="map-card__attrib">© OpenStreetMap contributors</span>
+            </a>
           </div>
 
           <div className="contact-form-wrap">

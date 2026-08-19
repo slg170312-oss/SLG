@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { categories } from '../data/productCategories';
 import CategoryHero from '../components/products/CategoryHero';
@@ -6,6 +6,13 @@ import CategoryCover from '../components/products/CategoryCover';
 import VariantDetail from '../components/products/VariantDetail';
 import ProductsCTA from '../components/products/ProductsCTA';
 import usePageMeta from '../hooks/usePageMeta';
+
+// One flat, ordered list of every product, so the detail arrows can run straight
+// through the whole catalogue and cross into the next category instead of
+// looping back to the first product of the one you're already in.
+const catalogue = categories.flatMap((category) =>
+  category.variants.map((variant) => ({ category, variant })),
+);
 
 export default function ProductsPage() {
   const { categorySlug, variantSlug } = useParams();
@@ -20,22 +27,32 @@ export default function ProductsPage() {
     `${selectedVariant.name} from SLG — ${selectedVariant.tags?.join(' · ') || activeCategory.name}. Real specifications, get a quote or download the datasheet.`,
   );
 
-  const handleCategoryChange = (categoryId) => {
-    const nextCategory = categories.find((c) => c.id === categoryId) ?? categories[0];
-    navigate(`/products/${categoryId}/${nextCategory.variants[0].id}`);
-  };
-
   const detailRef = useRef(null);
+  const scrollTimerRef = useRef(null);
 
+  useEffect(() => () => clearTimeout(scrollTimerRef.current), []);
+
+  // Picking a card scrolls the detail panel into view once the new product has
+  // rendered. Cancel any previous pending scroll first, so switching category
+  // straight after a card click doesn't fight the reset-to-top that follows.
   const handleVariantSelect = (variant) => {
-    navigate(`/products/${activeCategory.id}/${variant.id}`);
-    setTimeout(() => {
+    navigate(`/products/${activeCategory.id}/${variant.id}`, { state: { preserveScroll: true } });
+    clearTimeout(scrollTimerRef.current);
+    scrollTimerRef.current = setTimeout(() => {
       detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 100);
   };
 
-  const handleVariantNavigate = (variant) => {
-    navigate(`/products/${activeCategory.id}/${variant.id}`);
+  const handleCategoryChange = (categoryId) => {
+    clearTimeout(scrollTimerRef.current);
+    const nextCategory = categories.find((c) => c.id === categoryId) ?? categories[0];
+    navigate(`/products/${categoryId}/${nextCategory.variants[0].id}`);
+  };
+
+  // The arrows can hand back a product from a different category, so the target
+  // category comes from the caller rather than being assumed to be the current one.
+  const handleVariantNavigate = (variant, targetCategory = activeCategory) => {
+    navigate(`/products/${targetCategory.id}/${variant.id}`, { state: { preserveScroll: true } });
   };
 
   const categoryExists = categories.some((c) => c.id === categorySlug);
@@ -67,6 +84,7 @@ export default function ProductsPage() {
           variant={selectedVariant}
           category={activeCategory}
           variants={activeCategory.variants}
+          catalogue={catalogue}
           onSelectVariant={handleVariantNavigate}
         />
       </div>

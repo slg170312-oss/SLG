@@ -1,5 +1,5 @@
 const features = [
-  { value: '0.18 kW – 75 kW', label: 'Power Range' },
+  { value: '0.18 kW – 7.5 kW', label: 'Power Range' },
   { value: 'IP44 / IP55', label: 'Protection Class' },
   { value: '20°C to 45°C', label: 'Ambient Temp Range' },
   { value: '48h Dispatch', label: 'Standard Stock Items' },
@@ -16,8 +16,8 @@ export default function WhyChoose() {
           </h2>
           <p className="why-choose__description">
             Designed for high ambient temperatures, voltage fluctuations, and dusty
-            environments — SLG motors deliver class-leading MTBF across pumps,
-            compressors, conveyors, and CNC applications.
+            environments — SLG motors run reliably across pumps, compressors,
+            conveyors, and CNC applications.
           </p>
         </div>
         <div className="feature-grid">

@@ -108,7 +108,7 @@ const sectors = [
   },
   {
     title: 'Textile',
-    text: 'Loom-duty, ring-frame and process-machine motors built to mill electricals, frame profiles and continuous-duty cycles.',
+    text: 'Loom-duty and process-machine motors built to mill electricals, frame profiles and continuous-duty cycles.',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M4 5h16M4 9h16M4 13h16M4 17h16M4 21h16" />
@@ -169,7 +169,7 @@ export default function Custom() {
 
   return (
     <div className="page custom-page">
-      <section className="page-hero">
+      <section className="page-hero page-hero--custom">
         <div className="page-hero__overlay" aria-hidden="true" />
         <div className="page-hero__grid" aria-hidden="true" />
         <div className="page-hero__content container">

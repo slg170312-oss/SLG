@@ -1,66 +1,110 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useEnquiry } from '../../context/EnquiryContext';
 
-export default function VariantDetail({ variant, category, variants = [], onSelectVariant }) {
+export default function VariantDetail({
+  variant,
+  category,
+  variants = [],
+  catalogue = [],
+  onSelectVariant,
+}) {
   const { openEnquiry } = useEnquiry();
   const [slideDir, setSlideDir] = useState(null);
   const [activeImage, setActiveImage] = useState(variant?.image);
 
+  // The photo swap is deferred 250ms so the outgoing image can slide away first.
+  // Both refs track that in-flight step: the timer so it can be cancelled, and
+  // the destination so a click landing mid-slide advances from where we're
+  // heading rather than from what's still on screen.
+  const timerRef = useRef(null);
+  const pendingRef = useRef(null);
+
   const currentIndex = variants.findIndex((v) => v.id === variant?.id);
   const galleryImages = variant ? [variant.image, ...(variant.gallery || [])] : [];
 
-  // When the product is changed from outside (a card in the grid above), show its
-  // first photo. Arrow/dot navigation sets the photo itself, so the includes()
-  // check leaves that choice untouched and avoids a late-effect clobber.
+  // A pending slide must not outlive the component. Without this, clicking an
+  // arrow and then switching category fires onSelectVariant 250ms later and drags
+  // the user back to the category they just left.
+  useEffect(() => () => clearTimeout(timerRef.current), []);
+
+  // When the product changes from outside (a card in the grid above, or the back
+  // button), drop any in-flight slide and show the new product's first photo.
+  // Arrow/dot navigation sets the photo itself, so the includes() check leaves
+  // that choice untouched and avoids a late-effect clobber.
   useEffect(() => {
     if (!variant) return;
+    clearTimeout(timerRef.current);
+    pendingRef.current = null;
+    setSlideDir(null);
     const images = [variant.image, ...(variant.gallery || [])];
     setActiveImage((curr) => (images.includes(curr) ? curr : images[0]));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [variant?.id]);
 
-  const goToVariant = useCallback(
-    (nextVariant, dir, startAtLast) => {
-      const images = [nextVariant.image, ...(nextVariant.gallery || [])];
+  // Starts a slide, replacing any step still in flight — so rapid clicks collapse
+  // into a single swap at the final destination instead of fighting each other.
+  const slideTo = useCallback(
+    (nextVariant, nextCategory, image, dir) => {
+      pendingRef.current = { variant: nextVariant, category: nextCategory, image };
+      clearTimeout(timerRef.current);
       setSlideDir(dir > 0 ? 'left' : 'right');
-      setTimeout(() => {
-        onSelectVariant?.(nextVariant);
-        setActiveImage(startAtLast ? images[images.length - 1] : images[0]);
+      timerRef.current = setTimeout(() => {
+        if (nextVariant) onSelectVariant?.(nextVariant, nextCategory ?? category);
+        setActiveImage(image);
         setSlideDir(null);
+        pendingRef.current = null;
       }, 250);
     },
-    [onSelectVariant],
+    [onSelectVariant, category],
   );
 
-  const stepImage = useCallback((image, dir) => {
-    setSlideDir(dir > 0 ? 'left' : 'right');
-    setTimeout(() => {
-      setActiveImage(image);
-      setSlideDir(null);
-    }, 250);
-  }, []);
+  // Dots pick a product within the current category.
+  const goToVariant = useCallback(
+    (nextVariant, dir) => {
+      slideTo(nextVariant, category, nextVariant.image, dir);
+    },
+    [slideTo, category],
+  );
 
-  // The arrows step through every photo of the current product first, then move
-  // on to the next/previous product — wrapping around at the very ends.
+  // The arrows step through every photo of the current product, then on to the
+  // next product in the catalogue — running past the end of a category into the
+  // start of the next one, and wrapping round at the very end of the range.
   const navigate = useCallback(
     (dir) => {
-      const imgIdx = Math.max(0, galleryImages.indexOf(activeImage));
-      if (dir > 0) {
-        if (imgIdx < galleryImages.length - 1) {
-          stepImage(galleryImages[imgIdx + 1], 1);
-        } else if (variants.length > 1) {
-          const nextIndex = (currentIndex + 1) % variants.length;
-          goToVariant(variants[nextIndex], 1, false);
-        }
-      } else if (imgIdx > 0) {
-        stepImage(galleryImages[imgIdx - 1], -1);
-      } else if (variants.length > 1) {
-        const prevIndex = (currentIndex - 1 + variants.length) % variants.length;
-        goToVariant(variants[prevIndex], -1, true);
+      const pending = pendingRef.current;
+      const fromVariant = pending?.variant ?? variant;
+      const fromCategory = pending?.category ?? category;
+      const images = [fromVariant.image, ...(fromVariant.gallery || [])];
+      const imgIdx = Math.max(0, images.indexOf(pending?.image ?? activeImage));
+
+      // Another photo of this product to show before moving on. Carry the pending
+      // target through, or its navigation would be dropped along with its timer.
+      if (dir > 0 && imgIdx < images.length - 1) {
+        slideTo(pending?.variant ?? null, pending?.category ?? null, images[imgIdx + 1], 1);
+        return;
       }
+      if (dir < 0 && imgIdx > 0) {
+        slideTo(pending?.variant ?? null, pending?.category ?? null, images[imgIdx - 1], -1);
+        return;
+      }
+      if (catalogue.length < 2) return;
+
+      const fromIndex = catalogue.findIndex(
+        (entry) => entry.variant.id === fromVariant.id && entry.category.id === fromCategory.id,
+      );
+      const next = catalogue[(fromIndex + dir + catalogue.length) % catalogue.length];
+      const nextImages = [next.variant.image, ...(next.variant.gallery || [])];
+      // Stepping backwards lands on the previous product's last photo, so the
+      // sequence reads the same in both directions.
+      slideTo(
+        next.variant,
+        next.category,
+        dir > 0 ? nextImages[0] : nextImages[nextImages.length - 1],
+        dir,
+      );
     },
-    [activeImage, galleryImages, currentIndex, variants, goToVariant, stepImage],
+    [activeImage, variant, category, catalogue, slideTo],
   );
 
   if (!variant) return null;
@@ -111,7 +155,7 @@ export default function VariantDetail({ variant, category, variants = [], onSele
                       className={`variant-dot ${i === currentIndex ? 'variant-dot--active' : ''}`}
                       onClick={() => {
                         if (i === currentIndex) return;
-                        goToVariant(v, i > currentIndex ? 1 : -1, false);
+                        goToVariant(v, i > currentIndex ? 1 : -1);
                       }}
                       aria-label={`View ${v.name}`}
                     />

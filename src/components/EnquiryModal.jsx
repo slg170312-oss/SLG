@@ -6,6 +6,7 @@ const EMAIL_PATTERN = '[^\\s@]+@[^\\s@]+\\.[^\\s@]+';
 const NAME_MAX = 35;
 const PHONE_DIGITS = 10;
 const LOCATION_MAX = 250;
+const MIN_FILL_MS = 2000;
 
 export default function EnquiryModal({ onClose, prefillProduct = '' }) {
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
@@ -45,10 +46,16 @@ export default function EnquiryModal({ onClose, prefillProduct = '' }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Time-based spam check — reject if submitted < 2s after opening
-    if (Date.now() - openedAt.current < 2000) return;
-
     setStatus('submitting');
+
+    // Naive bots submit the instant the form appears. Rather than dropping such
+    // a submission silently — which left a genuinely fast fill (browser
+    // autofill, a returning buyer) clicking a button that did nothing at all —
+    // hold it back until the threshold passes, spinner showing, then send it.
+    const elapsed = Date.now() - openedAt.current;
+    if (elapsed < MIN_FILL_MS) {
+      await new Promise((resolve) => { setTimeout(resolve, MIN_FILL_MS - elapsed); });
+    }
 
     try {
       await submitEnquiry({
